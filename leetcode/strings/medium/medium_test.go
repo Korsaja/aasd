@@ -52,3 +52,17 @@ func TestExecuteInstructions(t *testing.T) {
 		assert.EqualValuesf(t, test.output, res, "test [%d] failed", i+1)
 	}
 }
+
+func TestPartitionLabels(t *testing.T) {
+	var tests = []struct {
+		input  string
+		output []int
+	}{
+		{input: "ababcbacadefegdehijhklij", output: []int{9, 7, 8}},
+		{input: "eccbbbbdec", output: []int{10}},
+	}
+
+	for i, test := range tests {
+		assert.EqualValuesf(t, test.output, partitionLabels(test.input), "test [%d] failed", i+1)
+	}
+}

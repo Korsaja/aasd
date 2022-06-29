@@ -66,6 +66,24 @@ func executeInstructions(n int, startPos []int, operations string) []int {
 	return res
 }
 
+// Runtime: 0 ms, faster than 100.00%
+// Memory Usage: 2.1 MB, less than 58.86%
+func partitionLabels(s string) (out []int) {
+	indexes := make([]int, 26)
+	for i, c := range s {
+		indexes[c-'a'] = i
+	}
+	var start, stop int
+	for i, c := range s {
+		stop = getMax(stop, indexes[c-'a'])
+		if i == stop {
+			out = append(out, stop-start+1)
+			start = stop + 1
+		}
+	}
+	return
+}
+
 // helpers
 func runeToInt(r rune) int {
 	return int(r - '0')
